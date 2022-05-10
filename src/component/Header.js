@@ -8,7 +8,7 @@ const Header = () => {
         <button>검색</button>
       </div>
       <h1>오늘의 뉴스</h1>
-      <div>로그인</div>
+      <div className='login'>로그인</div>
     </div>
   )
 }

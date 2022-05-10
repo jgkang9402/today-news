@@ -6,10 +6,18 @@
   align-items: center;
   justify-content: space-around;
 }
+.header h1,.login {
+  cursor: pointer;
+}
 
 .navbar {
   flex-wrap: nowrap;
+}
+.nav-link {
   color: #000;
+}
+.nav-link:hover {
+  color: red;
 }
 
 .item-img-size {

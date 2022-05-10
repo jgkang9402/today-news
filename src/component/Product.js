@@ -3,11 +3,11 @@ import { Container, Row, Col } from "react-bootstrap";
 
 const Product = ({ news }) => {
   console.log(news);
-  console.log(news[1]);
+  // console.log(news[1]);
   return (
     <Container>
       {news.map((data, i) => (
-        <Row>
+        <Row key={i}>
           <Col sm={4}>
             <img className="item-img-size" src={news[i].media} />
           </Col>
@@ -16,7 +16,6 @@ const Product = ({ news }) => {
               <h2>{news[i].title}</h2>
             </a>
             <p>{news[i].summary}</p>
-            <br />
             <hr />
             <div>
               {news[i].rights} ({news[i].published_date})
