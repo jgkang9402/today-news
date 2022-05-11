@@ -5,22 +5,50 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
+  padding: 20px;
+  padding-left: 0;
 }
-.header h1,.login {
+.header h1,
+.login {
   cursor: pointer;
 }
 
 .navbar {
   flex-wrap: nowrap;
+  border-bottom: 1px solid #333;
+  margin-bottom: 10px;
 }
 .nav-link {
   color: #000;
+  font-size: 20px;
 }
 .nav-link:hover {
   color: red;
 }
 
+.news-list {
+  border: 1px solid #000;
+  margin: 5px;
+}
+.news-list:last-child {
+  margin-bottom: 100px;
+}
 .item-img-size {
   width: 300px;
   height: 250px;
+}
+
+.search {
+  position: absolute;
+  left: 10px;
+  top: 25px;
+}
+
+.tothetop {
+  position: fixed;
+  right: 100px;
+  bottom: 100px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  font-size: 40px;
 }
