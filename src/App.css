@@ -31,7 +31,7 @@
   margin: 5px;
 }
 .news-list:last-child {
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 .item-img-size {
   width: 300px;
@@ -51,4 +51,15 @@
   border-radius: 50%;
   background-color: #ffffff;
   font-size: 40px;
+}
+
+.get-more-btn {
+  width: 150px;
+  height: 50px;
+  background-color: #fff;
+  border-radius: 30px;
+  margin-bottom: 100px;
+}
+.get-more-btn:hover {
+  background-color: darkgrey;
 }

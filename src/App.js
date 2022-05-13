@@ -12,6 +12,7 @@ function App() {
   let [keyword, setKeyword] = useState("");
   let url;
   let invalue = useRef();
+  let [urlCount, setUrlCount] = useState(10);
 
   const menuList = [
     "business",
@@ -43,22 +44,23 @@ function App() {
   };
 
   const getNewsData = async () => {
-    url = `https://api.newscatcherapi.com/v2/latest_headlines?countries=KR&topic=business&page_size=10`;
+    url = `https://api.newscatcherapi.com/v2/latest_headlines?countries=KR&topic=business&page_size=${urlCount}`;
   };
 
   const getNewsDataNav = async () => {
-    url = `https://api.newscatcherapi.com/v2/latest_headlines?countries=KR&topic=${menu}&page_size=10`;
+    url = `https://api.newscatcherapi.com/v2/latest_headlines?countries=KR&topic=${menu}&page_size=${urlCount}`;
   };
 
   const getNewsDataKeyword = async () => {
-    url = `https://api.newscatcherapi.com/v2/search?q=${keyword}&page_size=10`;
+    url = `https://api.newscatcherapi.com/v2/search?q=${keyword}&page_size=${urlCount}`;
   };
 
   const search = (e) => {
     if (e.key === "Enter") {
       setKeyword(e.target.value);
-      // console.log(setKeyword);
     }
+    setKeyword(e.target.value)
+    // console.log("타겟:", e.target.value, "키워드:", keyword);
     // const appClick = () => {
     //   setKeyword();
     //   // search()
@@ -68,28 +70,32 @@ function App() {
   // console.log(keyword);
 
   useEffect(() => {
-    if (menu == "") {
+    if (menu == "" || menu == "business") {
       getNewsData();
       apiSet();
-
       // console.log("처음실행됨");
     } else {
       getNewsDataNav();
       apiSet();
-
       // console.log("네브실행됨");
     }
+    // console.log(url);
   }, [menu]);
 
   useEffect(() => {
-    if (keyword == "") {
+    if (keyword == "" || keyword == menu) {
       return;
     } else {
       getNewsDataKeyword();
+      setUrlCount(10);
       apiSet();
-
       // console.log("키워드실행됨");
     }
+    // console.log(url);
+
+    // return ()=>{
+    //   setKeyword('')
+    // }
   }, [keyword]);
 
   // console.log(news);
@@ -108,6 +114,46 @@ function App() {
       top: 0,
       behavior: "smooth",
     });
+  };
+
+  const getMore = async () => {
+    setUrlCount((urlCount += 10));
+    if (keyword !== "" && keyword !== keyword) {
+      getNewsDataKeyword();
+      // console.log(url);
+    } else if (
+      (menu == "" || menu == "business") &&
+      (keyword == "" || keyword != keyword)
+    ) {
+      setKeyword(menu);
+      getNewsData();
+      // console.log(url);
+    } else if (menu !== "" && keyword == "") {
+      setKeyword(menu);
+      setKeyword("");
+      getNewsDataNav();
+      // console.log(url);
+    }else{
+      getNewsDataNav();
+      // console.log(url);
+    }
+    // else{
+    //   getNewsDataNav();
+    // }
+
+    // url = moreUrl
+    let response = await fetch(url, {
+      headers: header,
+    });
+    let data = await response.json();
+    let newsData = data.articles;
+    // console.log(newsData);
+    // console.log("키워드는", keyword);
+    // console.log(url);
+
+    setNews(newsData);
+    // console.log(news);
+    // apiSet();
   };
 
   return (
@@ -131,6 +177,9 @@ function App() {
       </button>
       <Navbar setMenu={setMenu} menuList={menuList} />
       <Product news={news} />
+      <button className="get-more-btn" onClick={getMore}>
+        더보기
+      </button>
     </div>
   );
 }
