@@ -30,7 +30,7 @@ function App() {
   ];
   // console.log(menu);
   let header = new Headers({
-    "x-api-key": `qvR62yXRpNhqGmkYB6fV8c65nLlrYKdo-8hwop0p5Eg`,
+    "x-api-key": `6d1sKq4E-kfqur-CzI1EqzcvNgEsCxAErY0l0jNESdg`,
   });
   const apiSet = async () => {
     let response = await fetch(url, {
